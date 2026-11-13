@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -57,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
         Layout = findViewById(R.id.main);
         imageView = findViewById(R.id.imageView1);
 
+        //Wstawiamy przed pierwszym wstawieniu obrazka if który da teraźniejszy indeks obrazka przy obrocie
+        if(savedInstanceState != null)
+        {
+            ktoryNrObrazka = savedInstanceState.getInt("obraz", 0);
+        }
+
+
         //Ustaw Obraz podstawowy jako pierwszy obraz
         imageView.setImageResource(imageArray[ktoryNrObrazka]);
 
@@ -90,5 +98,13 @@ public class MainActivity extends AppCompatActivity {
 
     private int imageArray(int ktoryNrObrazka) {
         return 0;
+    }
+
+    //Ważne do zapisania obrazka przy obrocie
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("obraz", ktoryNrObrazka);
+
     }
 }
